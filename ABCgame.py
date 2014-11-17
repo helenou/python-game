@@ -84,24 +84,24 @@ while (running):
            if event.key == K_ESCAPE:
                 pygame.event.post(pygame.event.Event(QUIT))
                 
-
-    newList = [ word for word in list if word[0] == char ]
-    #print newList
+        elif event.type == KEYUP:
+            # Retrieve words with first character matching char
+            newList = [ word for word in list if word[0] == char ]
+            # Select one word randomly
+            wordpick= random.choice(newList)
     
-    wordpick= random.choice(newList)
-	
-    font = pygame.font.SysFont("TimesNewRoman, Arial", 60)
-    text = font.render(wordpick, True, redColour, greyColour)
-
-   # window.blit( text, (window_width/2 - text.get_rect().width/2, window_height/2 - 100  ) )
-    window.blit( text, (640/2 - text.get_rect().width/2, 480/2 - 100  ) )    
-    pygame.display.update()
+        # Render word
+            # Set font, size, colour and background color of our word box
+            font = pygame.font.SysFont("TimesNewRoman, Arial", 60)
+            text = font.render(wordpick, True, redColour, greyColour)
+            # Set grey background to display text
+            window.fill(greyColour)
+            # Display the formatted word 
+            # window.blit( text, (window_width/2 - text.get_rect().width/2, window_height/2 - 100  ) )
+            window.blit( text, (640/2 - text.get_rect().width/2, 480/2 - 100  ) )    
+            
+            pygame.time.delay(300)
     
-    pygame.time.delay(300)
-    ##TODO:  effacer le mot apres display pour permettre de lire le suivant et non empiler (blit surface ?)
-    
-    
-    window.fill(greyColour)
-    pygame.display.update()
+            pygame.display.update()
     
     fpsClock.tick(600)
